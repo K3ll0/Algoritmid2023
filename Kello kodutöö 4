@@ -1,0 +1,38 @@
+1. Räsimine
+
+...on algoritm, mille väljund on alati sama suurusega (bittide arvuga) kirje, olenemata sisendi suurusest. 
+Iga muudatus sisendis muudab kogu väljundit. Kasutatakse krüptograafias ja andmemakogumite indekseerimisel. 
+Näiteks paroolide salvestamisel andmebaasidesse, failide muutmise detekteerimine 
+(kui muuta faili, muutub ka tulenev räsi) Räsimise tulemusel salvestatakse kanne räsitabelisse.
+Olulised on räsimisalgoritmi ühesuunalisus- väljundist ei tohi olla võimalik tuletada sisendit. 
+Originaalikindlus ja kokkupõrgete vältimine - teades sisendit ei ole lihtne leida mõnda teist sisendit, 
+mis annab sama väljundi. Samuti on oluline, et räsifunktsiooni arvutamine ei võtaks liiga palju aega, 
+kuid samas ei tohi see funktsioon ka liiga kiire ja kerge olla, et minimeerida brute force lähenemise edukust räside muukimisel.
+Kokkupõrgete lahendamise tehnikad aheldamine(separate chaining), kasutab linked listi, kus sama räsi tulemusega kirjed on tabelis ühe indeksi all linked listina.
+aadressimist (open addressing) - valib räside kokkupõrke puhul tabelis järgmise vaba indeksi ja lisab kirje sinna.
+Mõlemast järgnevates punktides pikemalt.
+
+Ülesanne 4: Open Addressing Tehnikate Uurimine
+
+1. Kirjuta lühike ülevaade avatud aadressimise meetodist kokkupõrgete lahendamisel räsimises.
+
+Kasutamise eeldus on, et tabel on alati suurem, kui kirjete hulk. 
+kirje tegemiseks otsitakse vaba kohta räsitabelis, kuni see leitakse. 
+Otsimise puhul võrreldakse tabeli võtmeid otsitavaga, kuni vastus või tühi lahter leitakse (mis puhul otsitavat ei leidu). 
+Kustutamisel märgitakse lahter kustutatuks - sinna saab uue kirje lisada aga see ei peate otsingut (erinevalt tühjast lahtrist). 
+Võrdluses aheldamisega (separate chaining) on eeliseks vahemälu parem kasutus, puudusek aga suurem arvutuskoormus ja oht, et räsitabel saab täis.
+
+2. Võrdle (teooria) kolme tehnikat: lineaarne otsing (linear probing), ruuduline otsing (quadratic probing) ja topelträsimine (double hashing).
+
+lineaarotsingus liigutakse mööda tabelit lineaarselt, ehk järjest. S on tabeli suurus
+(key) = (hash(x)+(n+1)) % S.
+ruudulises otsingus liigutakse järgmise vaba lahtrini ruutfunktsiooni kasutades, kui see on ka hõivatud siis kasvab ruutu võetav n (1,2,3...)
+(key) = (hash(x) + n^2) % S
+topelträsimise puhul kasutatakse teist räsifunktsiooni kokkupõrgete vältimiseks ja otsinguteks (key)= (hash(x) + hash2(x)).
+
+3. Aruta, millistes olukordades iga tehnika oleks kõige efektiivsem.
+
+Lineaarne otsing on kõige lihtsam ja ruumi-arvutuslikult efektiivsem. Võib põhjustada kirjete kuhjumist. 
+Topelt räsimine nõuab kõige rohkem mälu ja arvutusi aga väldib kirjete kuhjumist, mis võib mõnes olukorras vajalik olla. 
+Ruuduline otsing on arvutuse ja mäluvajaduse osas kahe eelmise vahepeal, väldib kirjete kuhjumist veidi paremini, kui lineaarne otsing 
+aga mitte sellisel määral nagu topelträsimine.
