@@ -1,0 +1,74 @@
+Algoritmid ja andmestruktuurid kodutöö nr 6
+Karl-Gustav Kello
+235694TAF
+
+
+Ülesanne 3: Dijkstra Algoritmi Teoreetiline Analüüs
+● Kirjelda Dijkstra algoritmi ja selle kasutamist lühima tee leidmiseks graafides.
+
+Algoritm leiab lühima tee graafi antud sõlme ja teiste sõlmede vahel arvutades teekonna pikkust ja läbides kõik teised sõlmed, 
+hoides mälus lühimate teekondade nimistut alguspunkti ja teiste sõlmede vahel. 
+Külastatud sõlmed märgitakse ära, kiirema teekonna leidmisel asendatakse eelmine rekord uuega ja sõlm salvestatakse lahendusritta. 
+Algoritm lõpetab, kui on kõik sõlmed läbi käinud. Töötab korrektselt positiivsete kaaludega servadega graafis.
+
+● Arutle, millistes olukordades on Dijkstra algoritm eriti efektiivne ja millistes olukordades see võib ebaefektiivne olla.
+
+Sobib hästi ühe alguspunktiga lühimate teekondade leidmisel (kaardid, IP ruutimine) aga liigub läbi terve graafi, mis tähendab, 
+et suuremate mahtude juures kulub liialt palju aega ja energiat ebamõistlike lahenduste proovimiseks 
+(teekond Tartust Tallinnasse läbi Pariisi,Riia jt maailmakaardi graafis olevate sõlmede). 
+Samuti on probleem negatiivsete servadega graafides (liidab kaalud kokku, negatiivsed servad annavad ebatõese tulemuse)
+
+
+Ülesanne 4: Bellman-Fordi Algoritmi Teoreetiline Analüüs
+● Kirjelda Bellman-Fordi algoritmi ja selle erinevust Dijkstra algoritmist.
+Mõlemad on SSSP (sigle source shortest path) algoritmid.
+
+B-F algoritm käib igal iteratsioonil läbi kõik servad, Dijkstra ainult lähimate naabersõlmede servad.
+B-F algoritm saab korrektselt hakkama negatiivsete servadega suunatud graafidega aga on ajalise kompleksuse osas kehvem.
+
+● Arutle, kuidas Bellman-Fordi algoritm suudab tuvastada negatiivseid tsükleid graafides ja milline on selle praktiline tähtsus.
+
+Graaf, millel on N sõlme, käiakse läbi N-1 korda. 
+Igal läbimisel lisatakse algussõlme (A) ja teiste sõlmede vahelise kauguse tabelisse tulemus.
+Kui N'dal korral tabelis tulemused muutuvad, sisaldab graaf negatiivset tsüklit.
+
+Praktikas ehk elulises olukorras tähistab negatiivne tsükkel näiteks arbitrži võimalust rahvusvahelisel valuutaturul.
+Negatiivsed servad võivad esineda närvivõrkude simulatsioonides jt. mudelites. 
+Näiteks ka teekonna arvutamisel, kus mäest alla sõites on võimalik energiat koguda (elektriauto).
+Paraku tuleb mäest üles sõitmiseks alati natuke rohkem energiat kulutada, kui sealt alla tulles on võimalik saada.
+
+
+Ülesanne 5: Graafide Värvimise Probleem
+● Kirjelda graafide värvimise probleemi olemust ja selle tähtsust arvutiteaduses.
+
+Kõige lihtsamas vormis:
+Määrates igale graafi sõlmele värv ei tohi (omavahel ühendused olevad) naabersõlmed olla sama värvi. 
+Igal graafil on selle loogika järgi number, mis on minimaalne värvide arv antud graafi sõlmede värvimiseks.
+Mida suurem see number on, seda tihedam on graaf.
+
+Arvutiteaduses sobib säärane kirjeldus näiteks kompilaatori optimeerimisel protsessori aja- ja registrite kasutamise optimeerimiseks. 
+
+● Arutle, kuidas graafide värvimist saab kasutada ressursside jaotamise ja konfliktide lahendamise probleemides.
+
+Kujutades kõiki osapooli või elemente sõlmedena ja nendevahelisei kitsendusi (või seoseid) äärtena saame graafi. 
+Värvitud graafi värvinumber (chromatic number) näitab minimaalset või optimaalset lahendust antud probleemile.
+
+
+Boonusülesanne (2 punkti): P vs NP Probleemi Ülevaade
+● Kirjelda P vs NP probleemi olemust ja selle tähtsust arvutiteaduses.
+
+P (Polynomial Time) - ülesanded, mille lahendamisega saab arvuti suhteliselt kiiresti hakkama. 
+NP (Nondeterministic Polynomial Time), ülesanded, mille lahenduse vastust on võimalik suhteliselt kiiresti arvutada, 
+samas ülesande lahendamine ei ole kiire ega kerge.  
+
+Küsimus on - kas iga probleem, mille õige vastuse kiire kontrollimine on võimalik, tähendab seda, 
+et sellele probleemile on teoreetiliselt olemas ka kiire arvutamise viis või lahenduskäik.
+
+● Arutle, miks on P vs NP probleemi lahendamine oluline ja millised võiksid olla selle lahendamise tagajärjed.
+
+Üks valdkond, mis püsib tänu probleemide lahendamise raskusele on krüptograafia. 
+Kui siffer on kergesti ära arvatav, ehk lahendatav, ei ole temast sõnumite krüpteerimisel eriti abi. 
+See tähendaks P vs NP probleemi lahendamisel seniste infoturvasüsteemide kokkukukkumist (pangad, kommunikatsioon, andmebaasid, jne). 
+Samas võiks lihtsamaks ja kiiremaks muutuda valgustruktuuride ja funktsioonide ennustamine, sudokude lahendamine, 
+optimaalsete teekondade arvutamine, teoreetilise matemaatika osakond lahendaks mitmeid fundamentaalseid küsimusi... 
+ja peaks otsima mõned uued probleemid, mida väga raskeks või võimatuks pidada.
